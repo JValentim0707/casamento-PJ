@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column ">
-    <v-navigation-drawer permanent expand-on-hover height="820px">
+    <v-navigation-drawer permanent height="820px" :mini-variant.sync="mini" v-model="menu">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
@@ -48,9 +48,8 @@
           { title: 'Lista de Presentes', icon: 'mdi-list-box-outline', value: 'gift' },
           { title: 'Sobre Nós', icon: 'mdi-ring', value: 'about' },
         ],
-        right: null,
-        drawer: false,
-        rail: false,
+        menu: false,
+        mini: false,
     }),
     methods: {
       selectOptionMenu(value) {
