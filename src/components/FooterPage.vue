@@ -49,10 +49,16 @@
 
   .title-footer {
     font-size: 20px;
+    @media (max-width: 600px) { 
+      font-size: 16px
+    }
   }
   .date {
     text-align: center;
     font-size: 70px;
+    @media (max-width: 600px) { 
+      font-size: 50px
+    }
   }
 }
 

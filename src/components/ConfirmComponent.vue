@@ -1,7 +1,7 @@
 <template>
   <div class=" d-flex content-container">
     <div class="confirm-container">
-      <div class="input-container" :class="{'active-serch': activeSerch}">
+      <div v-if="!confirmed" class="input-container" :class="{'active-serch': activeSerch}">
         <div class="search-container">
           <div class="text-label">{{activeSerch ? 'Buscar Codigo' : 'Insira Seu Codigo'}}</div>
           <div class="form-code">
@@ -18,10 +18,15 @@
                 <v-icon size="30px" color="white" class="mr-2">mdi-account</v-icon>
                 <div>{{ people }}</div>
               </div>
-              <v-btn class="mt-3" color="#3E945F" dark elevation="2" height="48"  width="100%" @click="searchCode">Confirmar</v-btn>
+              <v-btn class="mt-3" color="#3E945F" dark elevation="2" height="48"  width="100%" @click="confirmPeople">Confirmar</v-btn>
             </div>
           </div>
         </div>
+      </div>
+      <div class="confirmed-screen" v-else >
+        <v-icon color="white" size="80">mdi-emoticon-happy</v-icon>
+        <div>Obrigado por</div>
+        <div>Confirmar Presença!!</div>
       </div>
     </div>
   </div>
@@ -37,10 +42,11 @@
 
     data: () => ({
       activeSerch: false,
+      confirmed: false,
       peopleGroup:
         {
           code: '5543',
-          people: ['Fabiana Valentim Ferraz', 'Jose Alfredo', 'Lulu Maravilha', 'Bia Bacia']
+          people: ['Pessoa Exemplo 1', 'Pessoa Exemplo 2', 'Pessoa Exemplo 3', 'Pessoa Exemplo 4']
         }
     }),
 
@@ -51,6 +57,13 @@
       },
       searchCode() {
         this.activeSerch = true
+      },
+      confirmPeople() {
+        this.confirmed = true
+        setTimeout(() => this.$emit('setValueMenu', 'home'), 1000);
+      },
+      setMenu() {
+        this.$emit('setValueMenu', 'home')
       }
     }
   }
@@ -94,6 +107,11 @@
     transform: translateX(25%);
     width: 100%;
 
+    @media (max-width: 600px) {  
+      padding: 20px;
+      transform: none;
+    }
+
   }
 
   .form-code {
@@ -127,6 +145,18 @@
       display: flex;
       width: 45%;
     }
+    @media (max-width: 600px) { 
+      background-color: #C79BF2;
+      height: 170px;
+      .v-btn {
+        margin-left: 0px !important;
+      }
+      .form-code {
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+
   }
 }
 
@@ -181,6 +211,19 @@
     font-size: 22px;
     color: white;
   }
+}
+
+.confirmed-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #8bfa5f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 </style>

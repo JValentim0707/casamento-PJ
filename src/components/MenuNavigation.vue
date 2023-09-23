@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex flex-column ">
-    <v-navigation-drawer permanent height="820px" :mini-variant.sync="mini" v-model="menu">
+  <div class="d-flex flex-column tres">
+    <v-navigation-drawer class="test" permanent height="820px" :mini-variant.sync="mini" v-model="menu">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
@@ -10,6 +10,7 @@
             Selecione uma Opção
           </v-list-item-subtitle>
         </v-list-item-content>
+        <div @click="mini = true"><v-icon>mdi-close</v-icon></div>
       </v-list-item>
 
       <v-divider></v-divider>
@@ -49,12 +50,24 @@
           { title: 'Sobre Nós', icon: 'mdi-ring', value: 'about' },
         ],
         menu: false,
-        mini: false,
+        mini: true,
     }),
     methods: {
       selectOptionMenu(value) {
+        this.mini = true
         if(value) this.$emit('setValueMenu', value)
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+.test {
+  @media (max-width: 600px) {
+    // width: calc(100% - 56px);
+    // padding-right: 20%;
+    height: 100vh !important;
+  }
+  // display: none;
+}
+</style>
