@@ -5,7 +5,7 @@
         <div class="search-container">
           <div class="text-label">{{activeSerch ? 'Buscar Codigo' : 'Insira Seu Codigo'}}</div>
           <div class="form-code">
-            <v-text-field solo type="number"></v-text-field>
+            <v-text-field solo type="number" v-model="code"></v-text-field>
             <v-btn class="ml-2" elevation="2" height="48" @click="searchCode">Buscar</v-btn>
           </div>
         </div>
@@ -14,7 +14,7 @@
           <div class="family-title">Lista de Familiares</div>
           <div class="family-box">
             <div class="test">
-              <div class="family-list-people" v-for="(people, i) in peopleGroup.people" :key="i">
+              <div class="family-list-people" v-for="(people, i) in peopleGroup" :key="i">
                 <v-icon size="30px" color="white" class="mr-2">mdi-account</v-icon>
                 <div>{{ people }}</div>
               </div>
@@ -33,21 +33,21 @@
 </template>
 
 <script>
+import db from '../services/db.js'
+import { doc, setDoc } from 'firebase/firestore'
 
   export default {
     name: 'ConfirmComponent',
+    props: ['allPeople'],
 
     components: {
     },
 
     data: () => ({
       activeSerch: false,
+      code: null,
       confirmed: false,
-      peopleGroup:
-        {
-          code: '5543',
-          people: ['Pessoa Exemplo 1', 'Pessoa Exemplo 2', 'Pessoa Exemplo 3', 'Pessoa Exemplo 4']
-        }
+      peopleGroup: [],
     }),
 
 
@@ -55,11 +55,20 @@
       setValueMenu(value) {
         this.selectedMenu = value
       },
-      searchCode() {
+      async searchCode() {
+        const matchCode =  this.allPeople.find(x => x.code == this.code)
+        this.peopleGroup = matchCode.people
         this.activeSerch = true
       },
-      confirmPeople() {
+      async confirmPeople() {
         this.confirmed = true
+        window.open('https://chat.whatsapp.com/GiPxtMXJqEwBow2rberENn')
+        const matchCode =  this.allPeople.find(x => x.code == this.code)
+        delete matchCode.confirm
+        await setDoc(doc(db, 'Convidados', matchCode.id), {
+         ...matchCode,
+         confirm: true
+        })
         setTimeout(() => this.$emit('setValueMenu', 'home'), 1000);
       },
       setMenu() {

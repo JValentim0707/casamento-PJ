@@ -5,13 +5,13 @@
     </div>
     <div>
       <div class="content-stage">
-        <ConfirmComponent @setValueMenu="setValueMenu" class="test" v-if="selectedMenu === 'confirm'"></ConfirmComponent>
+        <ConfirmComponent @setValueMenu="setValueMenu" :allPeople="allInvited" class="test" v-if="selectedMenu === 'confirm'"></ConfirmComponent>
       </div>
       <div class="content-text">
         <div class="text-content-name">Patricia</div>
         <div class="text-content-name">E</div>
         <div class="text-content-name">Jonathan</div>
-        <div class="text-content-date">09/12/2023</div>
+        <div class="text-content-date">09/12/2023 as 18:00hrs</div>
 
       </div>
       <v-img
@@ -37,6 +37,9 @@
 import MenuNavigation from './MenuNavigation.vue'
 import ConfirmComponent from './ConfirmComponent.vue';
 
+import db from '../services/db.js'
+import { query, collection, getDocs } from 'firebase/firestore'
+
   export default {
     name: 'HomePage',
 
@@ -46,8 +49,22 @@ import ConfirmComponent from './ConfirmComponent.vue';
     },
 
     data: () => ({
-      selectedMenu: 'home'
+      selectedMenu: 'home',
+      allInvited: []
     }),
+
+    async mounted() {
+        const dbQuery = await getDocs(query(collection(db, 'Convidados')))
+
+        dbQuery.forEach(doc => {
+          const docData = doc.data()
+          const obj = {
+            id: doc.id,
+            ...docData
+          }
+          this.allInvited.push(obj)
+        })
+    },
 
     methods: {
       setValueMenu(value) {
