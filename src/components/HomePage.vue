@@ -6,6 +6,7 @@
     <div>
       <div class="content-stage">
         <ConfirmComponent @setValueMenu="setValueMenu" :allPeople="allInvited" class="test" v-if="selectedMenu === 'confirm'"></ConfirmComponent>
+        <PresentComponent class="test" v-if="selectedMenu === 'gift'"></PresentComponent>
       </div>
       <div class="content-text">
         <div class="text-content-name">Patricia</div>
@@ -36,6 +37,7 @@
 <script>
 import MenuNavigation from './MenuNavigation.vue'
 import ConfirmComponent from './ConfirmComponent.vue';
+import PresentComponent from './PresentComponent.vue'
 
 import db from '../services/db.js'
 import { query, collection, getDocs } from 'firebase/firestore'
@@ -45,7 +47,8 @@ import { query, collection, getDocs } from 'firebase/firestore'
 
     components: {
       MenuNavigation,
-      ConfirmComponent
+      ConfirmComponent,
+      PresentComponent
     },
 
     data: () => ({

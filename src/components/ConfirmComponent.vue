@@ -1,5 +1,5 @@
 <template>
-  <div class=" d-flex content-container">
+  <div class="d-flex content-container">
     <div class="confirm-container">
       <div v-if="!confirmed" class="input-container" :class="{'active-serch': activeSerch}">
         <div class="search-container">

@@ -47,7 +47,7 @@
           { title: 'Inicio', icon: 'mdi-home', value: 'home' },
           { title: 'Confirmar Presença', icon: 'mdi-account-group', value: 'confirm' },
           { title: 'Lista de Presentes', icon: 'mdi-list-box-outline', value: 'gift' },
-          { title: 'Sobre Nós', icon: 'mdi-ring', value: 'about' },
+          // { title: 'Sobre Nós', icon: 'mdi-ring', value: 'about' },
         ],
         menu: false,
         mini: true,
