@@ -2,7 +2,7 @@
   <div style="height: 100%; background-color: whitesmoke;" class="d-flex flex-column content-container">
     <div>
       <div class="hover-image">
-        <div class="hover-text">Seja Benvido</div>
+        <div class="hover-text">Sejam bem vindos!</div>
         <div class="hover-text">Ficamos Felizes de Ver Você!</div>
       </div>
       <v-img
@@ -13,8 +13,8 @@
       ></v-img>
     </div>
     <div class="present-container">
-      <div class="main-text"> Gostaria de Presentear Nosso Casal</div>
-      <div class="main-text">De uma Olhada na Nossa Lista de Presentes</div>
+      <div class="main-text"> Gostaria de nos presentear ?</div>
+      <div class="main-text">Dê uma olhada na lista de presentes!</div>
       <v-btn class="button-present" color="#3E945F" dark elevation="2" height="48" @click="openListPresent">Veja Nossa Lista</v-btn>
     </div>
 
